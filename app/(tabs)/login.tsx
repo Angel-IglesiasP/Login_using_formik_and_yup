@@ -3,12 +3,12 @@ import { FormErrorNote } from "@/src/error-note";
 import { useRouter } from "expo-router";
 import { Formik } from "formik";
 import {
-    ActivityIndicator,
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import * as yup from "yup";
 
@@ -26,12 +26,11 @@ const LoginSchema = yup.object({
 });
 
 export default function LoginForm() {
+  const router = useRouter();
   const initivalValues: LoginValues = {
     email: "",
     password: "",
   };
-
-  const router = useRouter();
 
   return (
     <Formik
@@ -41,8 +40,7 @@ export default function LoginForm() {
         setStatus(undefined);
         try {
           await UserAuth(values);
-          console.log("Logged In");
-          router.navigate("/success-page");
+          router.navigate("/employee-form");
         } catch (err) {
           setStatus("Either email or password is wrong");
         }
@@ -59,28 +57,28 @@ export default function LoginForm() {
         isValid,
         status,
       }) => (
-        <View style={styles.screen}>
-          <Text style={styles.pageTitle}>Welcome to login</Text>
+        <View>
+          <Text style={{ alignSelf: "center", padding: 5 }}>
+            Welcome to login
+          </Text>
 
-          <Text style={styles.textInputTitle}>Email</Text>
+          <Text>Email</Text>
           <TextInput
-            style={styles.textInput}
+            style={{ borderWidth: 1, maxWidth: 200 }}
             value={values.email}
             keyboardType="email-address"
             onChangeText={handleChange("email")}
             onBlur={handleBlur("email")}
-            placeholder="example@gmail.com"
           />
           <FormErrorNote message={touched.email ? errors.email : undefined} />
 
-          <Text style={styles.textInputTitle}>Password</Text>
+          <Text>Password</Text>
           <TextInput
-            style={styles.textInput}
+            style={{ borderWidth: 1, maxWidth: 200 }}
             value={values.password}
             secureTextEntry
             onChangeText={handleChange("password")}
             onBlur={handleBlur("password")}
-            placeholder="Password123"
           />
           <FormErrorNote
             message={touched.password ? errors.password : undefined}
@@ -91,11 +89,7 @@ export default function LoginForm() {
             disabled={isSubmitting || !isValid}
             style={[styles.button, !isValid && styles.disabled]}
           >
-            {isSubmitting ? (
-              <ActivityIndicator />
-            ) : (
-              <Text style={styles.buttonText}>Submit</Text>
-            )}
+            {isSubmitting ? <ActivityIndicator /> : <Text>Submit</Text>}
           </Pressable>
 
           {status && <FormErrorNote message={status} />}
@@ -106,37 +100,12 @@ export default function LoginForm() {
 }
 
 const styles = StyleSheet.create({
-  screen: { alignItems: "flex-start", gap: 10 },
-
-  pageTitle: {
-    fontSize: 30,
-    fontWeight: "700",
-    margin: 10,
-  },
-
-  textInput: {
-    borderWidth: 1,
-    borderRadius: 5,
-    marginHorizontal: 20,
-    width: 200,
-  },
-  textInputTitle: {
-    marginHorizontal: 20,
-    fontSize: 15,
-    fontWeight: "500",
-    top: 5,
-  },
-
   button: {
-    alignItems: "center",
-    backgroundColor: "#aaa",
+    backgroundColor: "#006eff",
     borderRadius: 5,
-    padding: 10,
-    margin: 10,
-    marginHorizontal: 20,
-    width: 200,
+    padding: 5,
+    maxWidth: 250,
   },
-  buttonText: { color: "white", fontSize: 15, fontWeight: "500" },
 
-  disabled: { opacity: 0.4 },
+  disabled: { opacity: 0.6 },
 });
