@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import React from "react";
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -25,6 +26,14 @@ const LoginSchema = yup.object({
     .min(6, "Password must be 6 characters long")
     .required("Password is required"),
 });
+const cloudIcon = [
+  { top: 60, left: -25 },
+  { top: 150, left: 10 },
+  { top: 15, left: 80 },
+  { top: 85, left: 190 },
+  { top: 155, left: 270 },
+  { top: 40, left: 320 },
+];
 
 export default function LoginForm() {
   const router = useRouter();
@@ -59,6 +68,15 @@ export default function LoginForm() {
         status,
       }) => (
         <View style={styles.screen}>
+          {cloudIcon.map((pos, index) => (
+            <Image
+              key={index}
+              source={require("../../assets/images/cloud-icon.png")}
+              style={[styles.logo, pos]}
+              resizeMode="contain"
+            />
+          ))}
+
           <Text style={styles.title}>Welcome to login</Text>
 
           <Text style={styles.text}>Email</Text>
@@ -96,6 +114,11 @@ export default function LoginForm() {
           </Pressable>
 
           {status && <FormErrorNote message={status} />}
+          <Image
+            source={require("../../assets/images/ground-con.png")}
+            style={styles.ground}
+            resizeMode="stretch"
+          />
         </View>
       )}
     </Formik>
@@ -108,6 +131,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    position: "absolute",
+    top: 50,
   },
   title: {
     fontSize: 30,
@@ -147,4 +176,10 @@ const styles = StyleSheet.create({
   },
 
   disabled: { opacity: 0.6 },
+  ground: {
+    width: "200%",
+    height: "25%",
+    position: "absolute",
+    bottom: 0,
+  },
 });

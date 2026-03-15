@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import React from "react";
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -19,6 +20,15 @@ type EmployeeValues = {
   department: string;
   jobTitle: string;
 };
+
+const cloudIcon = [
+  { top: 60, left: -25 },
+  { top: 150, left: 10 },
+  { top: 15, left: 80 },
+  { top: 85, left: 190 },
+  { top: 155, left: 270 },
+  { top: 40, left: 320 },
+];
 
 const EmployeeSchema = yup.object({
   fullName: yup
@@ -77,6 +87,14 @@ export default function EmployeeForm() {
         setFieldTouched,
       }) => (
         <View style={styles.screen}>
+          {cloudIcon.map((pos, index) => (
+            <Image
+              key={index}
+              source={require("../../assets/images/cloud-icon.png")}
+              style={[styles.logo, pos]}
+              resizeMode="contain"
+            />
+          ))}
           <Text style={styles.title}>Employee Information Form</Text>
           <Text style={styles.text}>Full Name</Text>
           <TextInput
@@ -186,6 +204,11 @@ export default function EmployeeForm() {
           <Pressable style={styles.resetButton} onPress={() => resetForm()}>
             <Text style={styles.resetButtonText}>Reset Form</Text>
           </Pressable>
+          <Image
+            source={require("../../assets/images/ground-con.png")}
+            style={styles.ground}
+            resizeMode="stretch"
+          />
         </View>
       )}
     </Formik>
@@ -199,6 +222,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "100%",
   },
+  logo: {
+    width: 100,
+    height: 100,
+    position: "absolute",
+    top: 50,
+  },
   title: {
     fontSize: 30,
     fontWeight: "700",
@@ -206,7 +235,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: "600",
   },
   textImput: {
     borderWidth: 1,
@@ -229,6 +258,7 @@ const styles = StyleSheet.create({
     borderColor: "#252222",
     borderWidth: 1,
     marginTop: 10,
+    zIndex: 1,
   },
   buttonText: {
     color: "white",
@@ -248,11 +278,20 @@ const styles = StyleSheet.create({
     borderColor: "#252222",
     marginTop: 10,
     backgroundColor: "#ddd",
+    zIndex: 1,
   },
   resetButtonText: {
     color: "black",
     fontSize: 15,
     fontWeight: "500",
     textAlign: "center",
+  },
+  ground: {
+    width: "200%",
+    height: "25%",
+    position: "absolute",
+    bottom: -20,
+    zIndex: 0,
+    opacity: 0.8,
   },
 });

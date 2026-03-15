@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import React from "react";
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -41,6 +42,15 @@ export default function SignUpForm() {
 
   const router = useRouter();
 
+  const cloudIcon = [
+    { top: 60, left: -25 },
+    { top: 150, left: 10 },
+    { top: 15, left: 80 },
+    { top: 85, left: 190 },
+    { top: 155, left: 270 },
+    { top: 40, left: 320 },
+  ];
+
   return (
     <Formik
       initialValues={initialValues}
@@ -62,6 +72,14 @@ export default function SignUpForm() {
         isValid,
       }) => (
         <View style={styles.screen}>
+          {cloudIcon.map((pos, index) => (
+            <Image
+              key={index}
+              source={require("../../assets/images/cloud-icon.png")}
+              style={[styles.logo, pos]}
+              resizeMode="contain"
+            />
+          ))}
           <Text style={styles.title}>Sign Up</Text>
 
           <Text style={styles.textInputTitle}>Name</Text>
@@ -120,6 +138,11 @@ export default function SignUpForm() {
               <Text style={styles.buttonText}>Create Account</Text>
             )}
           </Pressable>
+          <Image
+            source={require("../../assets/images/ground-con.png")}
+            style={styles.ground}
+            resizeMode="stretch"
+          />
         </View>
       )}
     </Formik>
@@ -132,6 +155,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    position: "absolute",
+    top: 50,
   },
 
   title: {
@@ -174,4 +203,10 @@ const styles = StyleSheet.create({
   },
 
   disabled: { opacity: 0.4 },
+  ground: {
+    width: "200%",
+    height: "25%",
+    position: "absolute",
+    bottom: 0,
+  },
 });
