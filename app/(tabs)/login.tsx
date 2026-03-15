@@ -2,6 +2,7 @@ import { UserAuth } from "@/src/auth/user-auth";
 import { FormErrorNote } from "@/src/error-note";
 import { useRouter } from "expo-router";
 import { Formik } from "formik";
+import React from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -57,14 +58,12 @@ export default function LoginForm() {
         isValid,
         status,
       }) => (
-        <View>
-          <Text style={{ alignSelf: "center", padding: 5 }}>
-            Welcome to login
-          </Text>
+        <View style={styles.screen}>
+          <Text style={styles.title}>Welcome to login</Text>
 
-          <Text>Email</Text>
+          <Text style={styles.text}>Email</Text>
           <TextInput
-            style={{ borderWidth: 1, maxWidth: 200 }}
+            style={styles.textImput}
             value={values.email}
             keyboardType="email-address"
             onChangeText={handleChange("email")}
@@ -72,9 +71,9 @@ export default function LoginForm() {
           />
           <FormErrorNote message={touched.email ? errors.email : undefined} />
 
-          <Text>Password</Text>
+          <Text style={styles.text}>Password</Text>
           <TextInput
-            style={{ borderWidth: 1, maxWidth: 200 }}
+            style={styles.textImput}
             value={values.password}
             secureTextEntry
             onChangeText={handleChange("password")}
@@ -89,7 +88,11 @@ export default function LoginForm() {
             disabled={isSubmitting || !isValid}
             style={[styles.button, !isValid && styles.disabled]}
           >
-            {isSubmitting ? <ActivityIndicator /> : <Text>Submit</Text>}
+            {isSubmitting ? (
+              <ActivityIndicator />
+            ) : (
+              <Text style={styles.buttonText}>Submit</Text>
+            )}
           </Pressable>
 
           {status && <FormErrorNote message={status} />}
@@ -100,11 +103,47 @@ export default function LoginForm() {
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    backgroundColor: "#b4c6db",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "700",
+    margin: 10,
+  },
+  text: {
+    fontSize: 15,
+    fontWeight: "500",
+  },
+  textImput: {
+    borderWidth: 1,
+    borderRadius: 5,
+    marginHorizontal: 20,
+    width: 200,
+    backgroundColor: "#d8d3d3",
+    marginTop: 10,
+    padding: 5,
+    marginBottom: 10,
+    fontSize: 15,
+    fontWeight: "500",
+  },
   button: {
     backgroundColor: "#006eff",
     borderRadius: 5,
-    padding: 5,
+    padding: 10,
     maxWidth: 250,
+    borderColor: "#252222",
+    borderWidth: 1,
+    marginTop: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 15,
+    fontWeight: "500",
+    textAlign: "center",
   },
 
   disabled: { opacity: 0.6 },

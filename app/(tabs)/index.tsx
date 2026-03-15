@@ -1,4 +1,5 @@
 import { useRouter } from "expo-router";
+import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function RegisterPage() {
@@ -32,22 +33,28 @@ export default function RegisterPage() {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: "#eee",
+    backgroundColor: "#b4c6db",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
   },
 
   header: { margin: 10 },
   headerText: { fontSize: 30, fontWeight: "700" },
 
-  body: { alignItems: "flex-start", margin: 10, marginHorizontal: 20, gap: 10 },
+  body: { alignItems: "center", margin: 10, marginHorizontal: 20, gap: 10 },
   bodyText: { fontSize: 15, fontWeight: "500" },
 
   button: {
-    alignItems: "center",
-    backgroundColor: "#aaa",
+    backgroundColor: "#006eff",
     borderRadius: 5,
-    padding: 5,
-    paddingHorizontal: 15,
-    width: 100,
+    padding: 10,
+    maxWidth: 250,
+    borderColor: "#252222",
+    borderWidth: 1,
+    marginTop: 5,
+    width: 80,
+    alignItems: "center",
   },
   buttonText: { fontSize: 15, fontWeight: "500", color: "white" },
 });

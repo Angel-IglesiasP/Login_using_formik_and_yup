@@ -2,13 +2,14 @@ import { AccountSetupAuth } from "@/src/auth/account-auth";
 import { FormErrorNote } from "@/src/error-note";
 import { useRouter } from "expo-router";
 import { Formik } from "formik";
+import React from "react";
 import {
-    ActivityIndicator,
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import * as yup from "yup";
 
@@ -61,7 +62,7 @@ export default function SignUpForm() {
         isValid,
       }) => (
         <View style={styles.screen}>
-          <Text style={styles.pageTitle}>Sign Up</Text>
+          <Text style={styles.title}>Sign Up</Text>
 
           <Text style={styles.textInputTitle}>Name</Text>
           <TextInput
@@ -126,9 +127,14 @@ export default function SignUpForm() {
 }
 
 const styles = StyleSheet.create({
-  screen: { alignItems: "flex-start", gap: 10, backgroundColor: "#eee" },
+  screen: {
+    backgroundColor: "#b4c6db",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
 
-  pageTitle: {
+  title: {
     fontSize: 30,
     fontWeight: "700",
     margin: 10,
@@ -139,24 +145,33 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 20,
     width: 200,
-  },
-  textInputTitle: {
-    marginHorizontal: 20,
+    backgroundColor: "#d8d3d3",
+    marginTop: 10,
+    padding: 5,
+    marginBottom: 10,
     fontSize: 15,
     fontWeight: "500",
-    top: 5,
+  },
+  textInputTitle: {
+    fontSize: 15,
+    fontWeight: "500",
   },
 
   button: {
-    alignItems: "center",
-    backgroundColor: "#aaa",
+    backgroundColor: "#006eff",
     borderRadius: 5,
     padding: 10,
-    margin: 10,
-    marginHorizontal: 20,
-    width: 200,
+    maxWidth: 250,
+    borderColor: "#252222",
+    borderWidth: 1,
+    marginTop: 5,
   },
-  buttonText: { color: "white", fontSize: 15, fontWeight: "500" },
+  buttonText: {
+    color: "white",
+    fontSize: 15,
+    fontWeight: "500",
+    textAlign: "center",
+  },
 
   disabled: { opacity: 0.4 },
 });

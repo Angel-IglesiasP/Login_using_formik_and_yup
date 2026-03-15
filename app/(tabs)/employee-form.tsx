@@ -1,12 +1,12 @@
 import { Formik } from "formik";
 import React from "react";
 import {
-    ActivityIndicator,
-    Pressable,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import * as yup from "yup";
 import { FormErrorNote } from "../../src/error-note";
@@ -76,11 +76,11 @@ export default function EmployeeForm() {
         setFieldValue,
         setFieldTouched,
       }) => (
-        <View>
-          <Text>Employee Information Form</Text>
-          <Text>Full Name</Text>
+        <View style={styles.screen}>
+          <Text style={styles.title}>Employee Information Form</Text>
+          <Text style={styles.text}>Full Name</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textImput}
             value={values.fullName}
             onChangeText={handleChange("fullName")}
             onBlur={handleBlur("fullName")}
@@ -90,7 +90,7 @@ export default function EmployeeForm() {
             message={touched.fullName ? errors.fullName : undefined}
           />
 
-          <Text>Employee Type</Text>
+          <Text style={styles.text}>Employee Type</Text>
           <View style={{ flexDirection: "row", gap: 10, marginBottom: 4 }}>
             {typeOptions.map((option) => {
               const selected = values.employeeType === option;
@@ -106,19 +106,13 @@ export default function EmployeeForm() {
                     paddingVertical: 10,
                     paddingHorizontal: 16,
                     borderWidth: 1,
-                    borderColor: selected ? "#006eff" : "#999",
+                    borderColor: selected ? "#006eff" : "#252222",
                     backgroundColor: selected ? "#dbeafe" : "#fff",
                     borderRadius: 8,
+                    marginTop: 10,
                   }}
                 >
-                  <Text
-                    style={{
-                      color: selected ? "#006eff" : "#333",
-                      fontWeight: "600",
-                    }}
-                  >
-                    {option}
-                  </Text>
+                  <Text style={styles.text}>{option}</Text>
                 </Pressable>
               );
             })}
@@ -127,9 +121,9 @@ export default function EmployeeForm() {
             message={touched.employeeType ? errors.employeeType : undefined}
           />
 
-          <Text>Email</Text>
+          <Text style={styles.text}>Email</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textImput}
             value={values.email}
             onChangeText={handleChange("email")}
             onBlur={handleBlur("email")}
@@ -139,9 +133,9 @@ export default function EmployeeForm() {
           />
           <FormErrorNote message={touched.email ? errors.email : undefined} />
 
-          <Text>Phone</Text>
+          <Text style={styles.text}>Phone</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textImput}
             value={values.phone}
             onChangeText={handleChange("phone")}
             onBlur={handleBlur("phone")}
@@ -150,9 +144,9 @@ export default function EmployeeForm() {
           />
           <FormErrorNote message={touched.phone ? errors.phone : undefined} />
 
-          <Text>Department</Text>
+          <Text style={styles.text}>Department</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textImput}
             value={values.department}
             onChangeText={handleChange("department")}
             onBlur={handleBlur("department")}
@@ -162,9 +156,9 @@ export default function EmployeeForm() {
             message={touched.department ? errors.department : undefined}
           />
 
-          <Text>Job Title</Text>
+          <Text style={styles.text}>Job Title</Text>
           <TextInput
-            style={styles.input}
+            style={styles.textImput}
             value={values.jobTitle}
             onChangeText={handleChange("jobTitle")}
             onBlur={handleBlur("jobTitle")}
@@ -190,7 +184,7 @@ export default function EmployeeForm() {
           </Pressable>
 
           <Pressable style={styles.resetButton} onPress={() => resetForm()}>
-            <Text>Reset Form</Text>
+            <Text style={styles.resetButtonText}>Reset Form</Text>
           </Pressable>
         </View>
       )}
@@ -199,42 +193,66 @@ export default function EmployeeForm() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    gap: 8,
+  screen: {
+    backgroundColor: "#b4c6db",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
   },
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 10,
-    alignSelf: "center",
+    fontSize: 30,
+    fontWeight: "700",
+    margin: 10,
   },
-  input: {
+  text: {
+    fontSize: 15,
+    fontWeight: "500",
+  },
+  textImput: {
     borderWidth: 1,
-    borderColor: "#999",
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 4,
+    borderRadius: 5,
+    marginHorizontal: 20,
+    width: 200,
+    backgroundColor: "#d8d3d3",
+    marginTop: 10,
+    padding: 5,
+    marginBottom: 10,
+    fontSize: 15,
+    fontWeight: "500",
   },
   button: {
     backgroundColor: "#006eff",
-    padding: 12,
-    borderRadius: 8,
+    borderRadius: 5,
+    padding: 10,
+    width: 125,
     alignItems: "center",
+    borderColor: "#252222",
+    borderWidth: 1,
     marginTop: 10,
   },
   buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: "white",
+    fontSize: 15,
+    fontWeight: "500",
+    textAlign: "center",
   },
   disabled: {
     opacity: 0.5,
   },
   resetButton: {
-    marginTop: 10,
-    padding: 12,
-    borderRadius: 8,
+    borderRadius: 5,
+    padding: 10,
+    width: 125,
     alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#252222",
+    marginTop: 10,
     backgroundColor: "#ddd",
+  },
+  resetButtonText: {
+    color: "black",
+    fontSize: 15,
+    fontWeight: "500",
+    textAlign: "center",
   },
 });
